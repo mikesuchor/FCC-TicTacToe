@@ -88,12 +88,3 @@ td {
   font-family: "Monoton", cursive;
   font-size: 32px;
 }
-
-#resetbutton {
-  margin-top: 10px;
-  width: 80px;
-  height: 40px;
-  color: orange;
-  font-family: '"Helvetica Neue"', Helvetica, Arial, sans-serif;
-  font-size: 18px;
-}
