@@ -7,6 +7,14 @@ User Story: My game will reset as soon as it's over so I can play again.
 User Story: I can choose whether I want to play as X or O.
 */
 
+/* Wish List
+
+1. Replace win/tie alerts with animated text.
+2. Fix computer AI to play perfectly.
+3. Add rules?
+4. Add tips on how to play perfectly.
+*/
+
 var board = [["", "", ""], ["", "", ""], ["", "", ""]];
 var player;
 var computer;
