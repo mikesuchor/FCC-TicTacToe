@@ -7,6 +7,14 @@ User Story: My game will reset as soon as it's over so I can play again.
 User Story: I can choose whether I want to play as X or O.
 */
 
+/* Wish List
+
+1. Replace win/tie alerts with animated text.
+2. Fix computer AI to play perfectly.
+3. Add rules?
+4. Add tips on how to play perfectly.
+*/
+
 var board = [["", "", ""], ["", "", ""], ["", "", ""]];
 var player;
 var computer;
@@ -66,16 +74,29 @@ function userMove(id) {
   if (testWin(player)) {
     return;
   }
-  if (squaresLeft === 0) {
-    tieGame();
-    return;
-  }
-  setTimeout(function() {
-    computerMove();
+  if(!testTie()) {
+    setTimeout(function() {
+      computerMove();
   }, 250);
+  }
+}
+
+/* Generates a random computer move in an empty square and disables that square */
+function computerMove() {
+  do {
+    generateRandomMove();
+  } while (
+    board[cpuRow][cpuColumn] === player ||
+    board[cpuRow][cpuColumn] === computer
+  );
+  board[cpuRow][cpuColumn] = computer;
+  document.getElementById(cpuRow + "" + cpuColumn).innerHTML = computer;
+  document.getElementById(cpuRow + "" + cpuColumn).removeAttribute("onclick");
+  squaresLeft--;
   if (testWin(computer)) {
     return;
   }
+  testTie();
 }
 
 /* Tests if 3 symbols in a row are the same and ends the game if true */
@@ -106,22 +127,17 @@ function testWin(symbol) {
   ) {
     alert(symbol + " wins!");
     disableBoard();
+    setTimeout(function() {
+    gameReset();
+  }, 1000);
     return true;
   }
 }
 
-/* Generates a random computer move in an empty square and disables that square */
-function computerMove() {
-  do {
-    generateRandomMove();
-  } while (
-    board[cpuRow][cpuColumn] === player ||
-    board[cpuRow][cpuColumn] === computer
-  );
-  board[cpuRow][cpuColumn] = computer;
-  document.getElementById(cpuRow + "" + cpuColumn).innerHTML = computer;
-  document.getElementById(cpuRow + "" + cpuColumn).removeAttribute("onclick");
-  squaresLeft--;
+/* Random number generation for use in computer square selection*/
+function generateRandomMove() {
+  cpuRow = Math.floor(Math.random() * 3);
+  cpuColumn = Math.floor(Math.random() * 3);
 }
 
 /* Disables clicking of buttons on the board */
@@ -132,16 +148,16 @@ function disableBoard() {
   }
 }
 
-/* Random number generation for use in computer square selection*/
-function generateRandomMove() {
-  cpuRow = Math.floor(Math.random() * 3);
-  cpuColumn = Math.floor(Math.random() * 3);
-}
-
-/* Ends the game in a tie */
-function tieGame() {
-  alert("The game is a tie!");
-  disableBoard();
+/* Tests if all the squares are full, and if so ends the game in a tie */
+function testTie() {
+  if (squaresLeft === 0) {
+    alert("The game is a tie!");
+    disableBoard();
+    setTimeout(function() {
+      gameReset();
+    }, 1000);
+    return true;
+  }
 }
 
 /* Resets the game */
