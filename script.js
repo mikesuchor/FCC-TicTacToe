@@ -102,30 +102,16 @@ function computerMove() {
 /* Tests if 3 symbols in a row are the same and ends the game if true */
 function testWin(symbol) {
   if (
-    (board[0][0] === symbol &&
-      board[0][1] === symbol &&
-      board[0][2] === symbol) ||
-    (board[1][0] === symbol &&
-      board[1][1] === symbol &&
-      board[1][2] === symbol) ||
-    (board[2][0] === symbol &&
-      board[2][1] === symbol &&
-      board[2][2] === symbol) ||
-    (board[0][0] === symbol &&
-      board[1][0] === symbol &&
-      board[2][0] === symbol) ||
-    (board[0][1] === symbol &&
-      board[1][1] === symbol &&
-      board[2][1] === symbol) ||
-    (board[0][2] === symbol &&
-      board[1][2] === symbol &&
-      board[2][2] === symbol) ||
-    (board[0][0] === symbol &&
-      board[1][1] === symbol &&
-      board[2][2] === symbol) ||
+    (board[0][0] === symbol && board[0][1] === symbol && board[0][2] === symbol) ||
+    (board[1][0] === symbol && board[1][1] === symbol && board[1][2] === symbol) ||
+    (board[2][0] === symbol && board[2][1] === symbol && board[2][2] === symbol) ||
+    (board[0][0] === symbol && board[1][0] === symbol && board[2][0] === symbol) ||
+    (board[0][1] === symbol && board[1][1] === symbol && board[2][1] === symbol) ||
+    (board[0][2] === symbol && board[1][2] === symbol && board[2][2] === symbol) ||
+    (board[0][0] === symbol && board[1][1] === symbol && board[2][2] === symbol) ||
     (board[0][2] === symbol && board[1][1] === symbol && board[2][0] === symbol)
   ) {
-    alert(symbol + " wins!");
+    alert(`${symbol} wins!`);
     disableBoard();
     setTimeout(function() {
     gameReset();
